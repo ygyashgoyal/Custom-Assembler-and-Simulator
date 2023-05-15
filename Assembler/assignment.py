@@ -2,6 +2,14 @@ f=open("co.txt","r")
 F=open("machinecode.txt","w")
 opert={"add":"00000", "sub":"00001","mov":["00010","00011"],"ld":"00100","st":"00101","mul":"00110","div":"00111","rs":"01000","ls":"01001","xor":"01010","or":"01011","and":"01100","not":"01101","cmp":"01110","jmp":"01111","jlt":"11100","jgt":"11101","je":"11111","hlt":"11010"}
 reg={"R0": "000","R1": "001","R2": "010","R3": "011","R4": "100","R5": "101","R6": "110","FLAGS":"111"}
+tpA=["add","sub","mul","xor","or","and"]
+tpB=["mov","rs","ls"]
+tpC=["mov","div","not","cmp"]
+tpD=["ld","st",]
+tpE=["jmp","jlt","jgt","je"]
+tpF=["hlt"]
+label={}
+lab={}
 L1={}
 L2=[]
 import random
@@ -72,7 +80,10 @@ def typeC(op,reg1,reg2,count):
         
     else:
         a=""
-        a+=(opert[op][1])
+        if(op=="mov"):
+            a+=(opert[op][1])
+        else:
+            a+=(opert[op])
         a+=("00000")
         a+=(reg[reg1])
         a+=(reg[reg2])
@@ -94,13 +105,44 @@ def typeD(op,reg1,mem,count):
                 a+=(reg[reg1])
                 a+=(variables[mem])
                 L2.append(a)
-            
 def typeE(op,mem,count):
     a=""
     a+=(opert[op])
     a+=("0000")
-    a+=(variables[mem])
+    label[mem]=str(bin(random.randint(65,127)))[2:]
+    lab[mem]=count
+    a+=label[mem]
     L2.append(a)
+    c=f.readline()
+    d=0
+    while (True):
+        c=c.split()
+        if c[0][:-1]==mem:
+            c=c[1:]
+            if c[0] in tpA:
+                typeA(c[0],c[1],c[2],c[3],count)
+            elif c[0] in tpB:
+                typeB(c[0],c[1],c[2],count)
+            elif c[0] in tpC:
+                typeC(c[0],c[1],c[2],count)
+            elif c[0] in tpD:
+                typeD(a[0],a[1],a[2],count)
+            elif c[0] in tpF:
+                e=""
+                e+="11010"
+                for i in range(11):
+                    e+="0"
+                L2.append(e)
+                d+=1
+            else:
+                print("Error")
+            return d
+            
+        else:
+            c=f.readline()
+            d+=1
+        
+    
 f1=open("co.txt","r")    
 def typeF(op,count):
     l=[i.strip() for i in f1]
@@ -157,13 +199,17 @@ while(True):
         elif(a[0]=="cmp"):
             typeC(a[0],a[1],a[2],count)
         elif(a[0]=="jmp"):
-            typeE(a[0],a[1],count)
+            d=typeE(a[0],a[1],count)
+            count2+=d
         elif(a[0]=="jlt"):
-            typeE(a[0],a[1],count)
+            d=typeE(a[0],a[1],count)
+            count2+=d
         elif(a[0]=="jgt"):
-            typeE(a[0],a[1],count)
+            d=typeE(a[0],a[1],count)
+            count2+=d
         elif(a[0]=="je"):
-            typeE(a[0],a[1],count)
+            d=typeE(a[0],a[1],count)
+            count2+=d
         elif(a[0]=="hlt"):
             count2+=1
             typeF(a[0],count)
@@ -173,8 +219,6 @@ while(True):
             else:
                 if(b[0]!="var"):
                     L1[count]=("Cant define variable in middle")
-        elif(a[0] in variables):
-            print("OK")
         else:
             L1[count]=("Typo error")
         k+=1
@@ -183,16 +227,19 @@ while(True):
     else:
         break
 
-    
-if L1=={}:
-    for i in range(len(L2)):
-        F.write(L2[i])
-        F.write("\n")
+if(count>128):
+    F.write("Input file exceeded 128 lines")
 else:
-    for key, values in L1.items():
-        F.write(f'{key}: {values}\n')
-    if count2==0:
-        F.write("hlt is missing")
-    
-
+    if L1=={}:
+        if count2==0:
+            F.write("hlt is missing")
+        else:
+            for i in range(len(L2)):
+                F.write(L2[i])
+                F.write("\n")
+    else:
+        for key, values in L1.items():
+            F.write(f'{key}: {values}\n')
+        if count2==0:
+            F.write("hlt is missing")
 F.close()
