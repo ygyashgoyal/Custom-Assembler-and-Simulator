@@ -115,35 +115,7 @@ def typeE(op,mem,count):
     lab[mem]=count
     a+=label[mem]
     L2.append(a)
-    c=f.readline()
-    d=0
-    cnt=0
-    while (True):
-        c=c.split()
-        if c[0][:-1]==mem:
-            c=c[1:]
-            if c[0] in tpA:
-                typeA(c[0],c[1],c[2],c[3],count)
-            elif c[0] in tpB:
-                typeB(c[0],c[1],c[2],count)
-            elif c[0] in tpC:
-                typeC(c[0],c[1],c[2],count)
-            elif c[0] in tpD:
-                typeD(a[0],a[1],a[2],count)
-            elif c[0] in tpF:
-                e=""
-                e+="11010"
-                for i in range(11):
-                    e+="0"
-                L2.append(e)
-                d+=1
-            else:
-                print("Error")
-            return d
             
-        else:
-            c=f.readline()
-            d+=1
 
     
 f1=open("co.txt","r")    
@@ -203,16 +175,12 @@ while(True):
             typeC(a[0],a[1],a[2],count)
         elif(a[0]=="jmp"):
             d=typeE(a[0],a[1],count)
-            count2+=d
         elif(a[0]=="jlt"):
             d=typeE(a[0],a[1],count)
-            count2+=d
         elif(a[0]=="jgt"):
             d=typeE(a[0],a[1],count)
-            count2+=d
         elif(a[0]=="je"):
             d=typeE(a[0],a[1],count)
-            count2+=d
         elif(a[0]=="hlt"):
             count2+=1
             typeF(a[0],count)
