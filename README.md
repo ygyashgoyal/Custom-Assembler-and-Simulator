@@ -6,9 +6,6 @@ This group project is part of course CSE112 in Winter Semester at IIIT-D
 
 This Repository contains ``Assignment.py`` as Assembler where we have taken ``co.txt`` as input test case and ``machinecode.txt`` as output. 
 
-## Contributions
-
-
 
 ## LICENSE
 
