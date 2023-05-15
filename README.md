@@ -4,7 +4,7 @@ This group project is part of course CSE112 in Winter Semester at IIIT-D
 
 ## About This Project
 
-We made this Project using hypothetical ISA , in this project we have `Assignment.py`
+We made this Project using hypothetical ISA , in this project we have `Assignment.py` as assembler and `co.txt` as input while `machinecode.txt` as input.
 
 ## LICENSE
 
