@@ -15,6 +15,8 @@ L2=[]
 import random
 variables = {}
 for line in f:
+    if line.strip() == "":
+        continue
     ans = line.strip().split()
     if ans[0]=="var":
         randomnumber = random.randint(65, 127)
@@ -115,6 +117,7 @@ def typeE(op,mem,count):
     L2.append(a)
     c=f.readline()
     d=0
+    cnt=0
     while (True):
         c=c.split()
         if c[0][:-1]==mem:
@@ -141,7 +144,7 @@ def typeE(op,mem,count):
         else:
             c=f.readline()
             d+=1
-        
+
     
 f1=open("co.txt","r")    
 def typeF(op,count):
@@ -165,8 +168,8 @@ count=len(variables)
 count2=0
 while(True):
     a=f.readline()
-    if(a!=""):
-        a=a.split()
+    a=a.split()
+    if(a!=[]):
         if(a[0]=="add"):
             typeA(a[0],a[1],a[2],a[3],count)
         elif(a[0]=="sub"):
@@ -219,6 +222,23 @@ while(True):
             else:
                 if(b[0]!="var"):
                     L1[count]=("Cant define variable in middle")
+        elif(a[0] not in list(variables.keys())):
+            if a[0][-1]==":":
+                a=a[1:]
+                if a[0] in tpA:
+                    typeA(a[0],a[1],a[2],a[3],count)
+                elif a[0] in tpB:
+                    typeB(a[0],a[1],a[2],count)
+                elif a[0] in tpC:
+                    typeC(a[0],a[1],a[2],count)
+                elif a[0] in tpD:
+                    typeD(a[0],a[1],a[2],count)
+                elif a[0] in tpF:
+                    e=""
+                    e+="11010"
+                    for i in range(11):
+                        e+="0"
+                    L2.append(e)
         else:
             L1[count]=("Typo error")
         k+=1
