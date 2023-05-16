@@ -6,6 +6,13 @@ This group project is part of course CSE112 in Winter Semester at IIIT-D
 
 We made this Project using hypothetical ISA , in this project we have `Assignment.py` as assembler and `co.txt` as input while `machinecode.txt` as an output.
 
+## Contributions
+
+ 1)Yash Goyal
+ 2)Tamim Choudhary
+ 3)Sangay Tenzin
+ 4)Tikam
+
 ## LICENSE
 
                                  Apache License
