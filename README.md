@@ -8,10 +8,10 @@ We made this Project using hypothetical ISA , in this project we have `Assignmen
 
 ## Contributions
 
- 1)Yash Goyal
- 2)Tamim Choudhary
- 3)Sangay Tenzin
- 4)Tikam
+1) Yash Goyal 
+2)
+3) Aditya Jain
+4) Athiyo Chakma
 
 ## LICENSE
 
