@@ -6,6 +6,12 @@ This group project is part of course CSE112 in Winter Semester at IIIT-D
 
 We made this Project using hypothetical ISA , in this project we have `Assignment.py` as assembler and `co.txt` as input while `machinecode.txt` as an output.
 
+## How to Git Clone
+
+To git clone this repository to your system
+
+``git clone https://github.com/yashgg22588/Custom-Assembler-and-Simulator.git``
+
 ## Contributions
 
 1) Yash Goyal 
